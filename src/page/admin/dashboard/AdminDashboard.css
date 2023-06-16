@@ -1,0 +1,49 @@
+.admin-dashboard {
+  width: 100%;
+  overflow: hidden;
+}
+.sidebar-list-container {
+  background-color: #f0ebce;
+  height: 100vh;
+  width: 20%;
+}
+
+.sidebar-listing-container {
+  width: 100%;
+}
+.sidebar-title {
+  height: 60px;
+  text-align: center;
+}
+.sidebar-list {
+  width: 100%;
+  height: 54px;
+  list-style-type: none;
+  background: #4e6c50;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.sidebar-list:active {
+  background: #d7ac61 !important;
+}
+
+.sidebar-list:hover {
+  background-color: #aa8b56 !important;
+}
+/* .sidebar-list:focus li {
+  background-color: #bd831f !important;
+} */
+.active {
+  background: #aa8b56 !important;
+}
+.sidebar-list-title {
+  color: #f0ebce;
+}
+
+.tree-map {
+  width: 1105px;
+  height: 500px;
+  background-color: #000000;
+  padding: 30px;
+  overflow: hidden;
+}
