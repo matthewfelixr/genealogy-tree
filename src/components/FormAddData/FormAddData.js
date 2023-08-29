@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import "./FormAddData.css";
+// import "./FormAddData.css";
 function FormAddData() {
   const {
     register,
@@ -8,7 +8,7 @@ function FormAddData() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <div className="form-container p-5">

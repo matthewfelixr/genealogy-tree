@@ -1,0 +1,118 @@
+.root {
+  position: absolute;
+  display: flex;
+  padding: 10px;
+}
+
+.inner {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.otonom {
+  background: #edffa4;
+}
+.mataram {
+  background: #ffcba4;
+}
+.belanda {
+  background: #a4fdff;
+}
+.inggris {
+  background: #a4bbff;
+}
+.jepang {
+  background: #ffffff;
+}
+.nkri {
+  background: #ffa4a4;
+}
+
+.isRoot {
+  border-color: rgba(0, 0, 0, 1);
+}
+
+.isHover {
+  border-color: rgba(0, 0, 0, 0.8);
+}
+
+.container {
+  padding-top: 20%;
+  width: inherit;
+  height: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.id {
+  font-size: 20px;
+  line-height: 1;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.name {
+  font-size: 19px;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.sub {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  width: 14px;
+  height: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px 0;
+  background: #fff;
+  cursor: pointer;
+}
+/* .add {
+  position: absolute;
+  top: 160px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px 0;
+  background: #e2ff8bf3;
+  cursor: pointer;
+}
+.edit {
+  position: absolute;
+  font-size: 7px;
+  top: 130px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px 0;
+  background: #fff700f3;
+  cursor: pointer;
+}
+.setRootBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px 0;
+  background: #f2ff00;
+  cursor: pointer;
+} */
+
+.sub.male {
+  background: #fdaed8;
+}
+
+.sub.female {
+  background: #a4ecff;
+}

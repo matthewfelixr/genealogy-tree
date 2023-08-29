@@ -1,18 +1,135 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../../components/Navbar/Navbar";
 import "./AdminDashboard.css";
 import CardFeatureAdmin from "../../../components/Cards/CardFeatureAdmin/CardFeatureAdmin";
-// import RenderFamilyTree from "../../../components/FamilyTree/RenderFamilyTree";
-import FormAddData from "../../../components/FormAddData/FormAddData";
 import TableAdmin from "../../../components/TableAdmin/TableAdmin";
-import FamilyChart from "../../../components/FamilyChart/FamilyChart";
+import FamilyTrees from "../../../components/FamilyTrees/FamilyTrees";
+import axios from 'axios'
+import jwt_decode from 'jwt-decode'
+import RulerTree from "../../features/RulerTree";
 
+const base_url = "http://localhost:3030"
+
+const data = [
+  {
+    "id": "Father",
+    "gender": "male",
+    "name": "pant",
+    "parents": [],
+    "siblings": [],
+    "spouses": [{ "id": "Mother", "type": "married" }],
+    "children": [
+      { "id": "Daughter1", "type": "blood" },
+      { "id": "Son1", "type": "blood" }
+    ],
+    "desc": "desc"
+  },
+  {
+    "id": "Daughter1",
+    "gender": "female",
+    "name": "sss1",
+    "parents": [
+      { "id": "Father", "type": "blood" },
+      { "id": "Mother", "type": "blood" }
+    ],
+    "siblings": [{ "id": "Son1", "type": "blood" }],
+    "spouses": [],
+    "children": [],
+    "desc": "desc"
+  },
+  {
+    "id": "Son1",
+    "gender": "male",
+    "name": "sss1",
+    "parents": [
+      { "id": "Father", "type": "blood" },
+      { "id": "Mother", "type": "blood" }
+    ],
+    "siblings": [{ "id": "Daughter1", "type": "blood" }],
+    "spouses": [{ "id": "Spouse1", "type": "married" }],
+    "children": [{ "id": "Grandson1", "type": "blood" }],
+    "desc": "desc"
+  },
+  {
+    "id": "Spouse1",
+    "gender": "female",
+    "name": "sss1",
+    "parents": [],
+    "siblings": [
+      { "id": "Son1", "type": "blood" },
+      { "id": "Daughter1", "type": "blood" }
+    ],
+    "spouses": [{ "id": "Son1", "type": "married" }],
+    "children": [{ "id": "Grandson1", "type": "blood" }],
+    "desc": "desc"
+  },
+  {
+    "id": "Grandson1",
+    "gender": "male",
+    "name": "sss1",
+    "parents": [
+      { "id": "Son1", "type": "blood" },
+      { "id": "Spouse1", "type": "blood" }
+    ],
+    "siblings": [],
+    "spouses": [],
+    "children": [],
+    "desc": "desc"
+  },
+  {
+    "id": "Mother",
+    "gender": "female",
+    "name": "sss",
+    "parents": [],
+    "siblings": [],
+    "spouses": [],
+    "children": [
+      { "id": "Daughter1", "type": "blood" },
+      { "id": "Son1", "type": "blood" }
+    ],
+    "desc": "desc"
+  }
+]
+
+console.log(data)
 function AdminDashboard() {
+  const [nodes, setNodes] = useState(null);
+  const [loaded,setLoaded] = useState(false);
   const [toggleState, setToggleState] = useState(0);
+
+  const token = localStorage.getItem('token')
+  const decoded = jwt_decode(token)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    const decoded = jwt_decode(token)
+    if (decoded.exp < Date.now() / 1000) {
+      console.log('Token has expired.');
+      logOut();
+    } else {
+      console.log('Token has not expired.');
+    }
+  },[])
+
+
+  useEffect(() => {
+    axios.get(`${base_url}/people`).then((res)=>{
+      setNodes(res.data)
+      setLoaded(true)
+    })
+    .catch(
+      setNodes(null)
+    )
+  },[loaded])
 
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  const logOut = ()=> {
+    localStorage.removeItem("token");
+    window.location.reload()
+  }
 
   return (
     <>
@@ -27,16 +144,16 @@ function AdminDashboard() {
               }`}
               onClick={() => toggleTab(1)}
             >
-              <p className="sidebar-list-title">Feature</p>
+              <p className="sidebar-list-title">Silsilah Keluarga</p>
             </li>
-            <li
+            {/* <li
               className={`sidebar-list align-items-center py-3 ${
                 toggleState === 2 ? "active" : ""
               }`}
               onClick={() => toggleTab(2)}
             >
-              <p className="sidebar-list-title">Feature</p>
-            </li>
+              <p className="sidebar-list-title">Generasi Penguasa</p>
+            </li> */}
             <li
               className={`sidebar-list align-items-center py-3 ${
                 toggleState === 3 ? "active" : ""
@@ -45,9 +162,15 @@ function AdminDashboard() {
             >
               <p className="sidebar-list-title">Feature</p>
             </li>
+            <li
+              className={`logout-button bg-danger align-items-center py-3`}
+              onClick={() => logOut()}
+            >
+              <p className="sidebar-list-title">Log Out</p>
+            </li>
           </ul>
         </div>
-        <div className="admin-dashboard-content ps-4 pt-2">
+        <div className="admin-dashboard-content ps-4 pt-2 w-100">
           <h1 className="admin-dashboard-title"> Hello, Admin</h1>
 
           <div
@@ -71,11 +194,10 @@ function AdminDashboard() {
               description="Tampilkan database dalam bentuk tabel"
             />
           </div>
-          {toggleState === 1 && <FamilyChart/>}
-          {toggleState === 2 && <FormAddData />}
+          {toggleState === 1 && <FamilyTrees tree={nodes} />}
+          {/* {toggleState === 2 && <RulerTree />} */}
           {toggleState === 3 && <TableAdmin />}
-          {/* <FamilyChart data ={familyTree}/> */}
-          {/* <FormAddData/> */}
+
         </div>
       </div>
     </>

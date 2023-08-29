@@ -37,7 +37,7 @@ export default class FamilyTree extends React.Component {
         mini_tree: true,
         link_break: false
       });
-
+      //console.log(view.svg);
     view.setCard(Card);
     store.setOnUpdate((props) => view.update(props || {}));
     store.update.tree({ initial: true });

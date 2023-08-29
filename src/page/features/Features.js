@@ -4,30 +4,36 @@ import CardFeature from "../../components/Cards/CardFeature";
 import "./Features.css"
 
 function Features() {
+
+  
   return (
     <>
       <Navbar/>
       <div className="feature-body py-5">
-        <h1 className="mt-2 mb-2 text-center">Hello This is the Feature Title</h1>
-        <p className="mb-5 text-center"> and this is should be the explanation for this page</p>
+        <h1 className="mt-2 mb-2 text-center feature-title">Jelajahi Feature <span className="highlight">GenTree</span></h1>
+        <p className="mb-5 text-center feature-sub">Pilihlah <span className="highlight">layanan</span> yang akan anda jelajahi pada Website GenTree</p>
         <div className="row mx-auto my-auto w-75">
           <div className="col align-items-center justify-content-center d-flex">
             <CardFeature
             picture="/image/silsilah-keluarga.png"
             title="Silsilah Keluarga"
-            description="Pelajari bagaimana silsilah keluarga Kerajaan Sumedang"/>
+            description="Lihat bagaimana silsilah keluarga Kerajaan Sumedang"
+            feature_name="family-tree"
+            />
           </div>
-          <div className="col align-items-center justify-content-center d-flex">
+          {/* <div className="col align-items-center justify-content-center d-flex">
             <CardFeature
             picture="/image/cari-silsilah.png"
             title="Cari Silsilah Keluarga"
             description="Pelajari sebagian silsilah keluarga"/>
-          </div>
+          </div> */}
           <div className="col align-items-center justify-content-center d-flex">
           <CardFeature
             picture="/image/cari-silsilah.png"
-            title="Fitur Dalam Pengembangan"
-            description="Fitur ini sedang dalam pengembangan"/>
+            title="Generasi Penguasa"
+            description="Lihat siapa saja yang pernah menjadi penguasa Kerajaan Sumedang"
+            feature_name="ruler-tree"
+            />
           </div>
         </div>
       </div>

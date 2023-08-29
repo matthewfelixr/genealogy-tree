@@ -2,15 +2,27 @@ import React from "react";
 import Navbar from "../../../components/Navbar/Navbar";
 import { useForm } from "react-hook-form";
 import "./AdminLogin.css"
+import axios from "axios";
 
 function AdminLogin() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data)
+      axios.post("http://localhost:3030/admin", data).then((res)=>{
+        console.log(res.data.data)
+        const token = res.data.data.token
+        localStorage.setItem("token", token);
+        console.log("Token saved to local storage:", token);
+        window.location.reload(true)
+
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <>
@@ -23,27 +35,19 @@ function AdminLogin() {
           <div className="login-form">
             <p className="login-form-title text-center mb-3"> Admin Login </p>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <label className="login-form-label"> Email </label>
-              <input
-                className="form-input px-2 mx-auto mb-2"
-                type="email"
-                placeholder="Email"
-                {...register("Email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-              />
-              <label className="login-form-label"> Password </label>
-              <input
-                className="form-input px-2 mx-auto mb-2"
-                type="password"
-                placeholder="Password"
-                {...register("Password", {
-                  required: true,
-                  pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i,
-                })}
-              />
-              <input className="btn-login mt-4" type="submit" />
+              <div>
+                <label htmlFor="username">Username</label>
+                <input className="form-input" {...register('userName', { required: true })}
+                />
+                {errors.username && <span>Username is required</span>}
+              </div>
+              <div>
+                <label htmlFor="password">Password</label>
+                <input className="form-input" type="password" {...register('password', { required: true })}
+                />
+                {errors.password && <span>Password is required</span>}
+              </div>
+              <button className="btn-login mt-2" type="submit">Login</button>
             </form>
           </div>
         </div>

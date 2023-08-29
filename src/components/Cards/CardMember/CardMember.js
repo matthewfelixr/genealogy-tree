@@ -3,9 +3,9 @@ import './CardMember.css'
 
 function CardMember(props) {
 
-  const { title, description, picture } = props
+  const { title, description, picture, classNames } = props
   return (
-    <div className='card-container p-2'>
+    <div className={`card-container p-2 ${classNames}`}>
         <div className='card-avatar my-4'>
           <img src={picture} alt={`logo ${picture}`}></img>
         </div>
