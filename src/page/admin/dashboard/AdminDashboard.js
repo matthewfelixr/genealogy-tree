@@ -10,88 +10,6 @@ import RulerTree from "../../features/RulerTree";
 
 const base_url = "http://localhost:3030"
 
-const data = [
-  {
-    "id": "Father",
-    "gender": "male",
-    "name": "pant",
-    "parents": [],
-    "siblings": [],
-    "spouses": [{ "id": "Mother", "type": "married" }],
-    "children": [
-      { "id": "Daughter1", "type": "blood" },
-      { "id": "Son1", "type": "blood" }
-    ],
-    "desc": "desc"
-  },
-  {
-    "id": "Daughter1",
-    "gender": "female",
-    "name": "sss1",
-    "parents": [
-      { "id": "Father", "type": "blood" },
-      { "id": "Mother", "type": "blood" }
-    ],
-    "siblings": [{ "id": "Son1", "type": "blood" }],
-    "spouses": [],
-    "children": [],
-    "desc": "desc"
-  },
-  {
-    "id": "Son1",
-    "gender": "male",
-    "name": "sss1",
-    "parents": [
-      { "id": "Father", "type": "blood" },
-      { "id": "Mother", "type": "blood" }
-    ],
-    "siblings": [{ "id": "Daughter1", "type": "blood" }],
-    "spouses": [{ "id": "Spouse1", "type": "married" }],
-    "children": [{ "id": "Grandson1", "type": "blood" }],
-    "desc": "desc"
-  },
-  {
-    "id": "Spouse1",
-    "gender": "female",
-    "name": "sss1",
-    "parents": [],
-    "siblings": [
-      { "id": "Son1", "type": "blood" },
-      { "id": "Daughter1", "type": "blood" }
-    ],
-    "spouses": [{ "id": "Son1", "type": "married" }],
-    "children": [{ "id": "Grandson1", "type": "blood" }],
-    "desc": "desc"
-  },
-  {
-    "id": "Grandson1",
-    "gender": "male",
-    "name": "sss1",
-    "parents": [
-      { "id": "Son1", "type": "blood" },
-      { "id": "Spouse1", "type": "blood" }
-    ],
-    "siblings": [],
-    "spouses": [],
-    "children": [],
-    "desc": "desc"
-  },
-  {
-    "id": "Mother",
-    "gender": "female",
-    "name": "sss",
-    "parents": [],
-    "siblings": [],
-    "spouses": [],
-    "children": [
-      { "id": "Daughter1", "type": "blood" },
-      { "id": "Son1", "type": "blood" }
-    ],
-    "desc": "desc"
-  }
-]
-
-console.log(data)
 function AdminDashboard() {
   const [nodes, setNodes] = useState(null);
   const [loaded,setLoaded] = useState(false);
@@ -188,11 +106,11 @@ function AdminDashboard() {
               title="Tambah Data"
               description="Tambahkan data untuk melakukan perbaruan data silsilah kerajaan"
             />
-            <CardFeatureAdmin
+            {/* <CardFeatureAdmin
               picture={"image/database-silsilah-keluarga.png"}
               title="Tampilkan Database"
               description="Tampilkan database dalam bentuk tabel"
-            />
+            /> */}
           </div>
           {toggleState === 1 && <FamilyTrees tree={nodes} />}
           {/* {toggleState === 2 && <RulerTree />} */}
