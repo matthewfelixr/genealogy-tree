@@ -125,7 +125,8 @@ const FamilyTrees = ({tree}) => {
               <Modal.Body>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <p className="form-label">Nama</p>
-                <input className="form-basic-data" type="text" placeholder="Nama Lengkap" {...register("nama", {required: true})} />
+                <input className={`form-basic-data ${errors.nama ? "border-2 border-danger" : ""}`} type="text" placeholder="Nama Lengkap" {...register("nama", {required: true})} />
+                {errors.nama && <span className="text-danger">Nama Harus Diisi ! </span>}
                 <p className="form-label">Alias</p>
                 <input className="form-basic-data" type="text" placeholder="Alias" {...register("alias", {required: true})} />
                 <p className="form-label">Nama Kecil</p>

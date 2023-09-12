@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../../components/Navbar/Navbar";
 import { useForm } from "react-hook-form";
 import "./AdminLogin.css"
@@ -6,20 +6,18 @@ import axios from "axios";
 
 function AdminLogin() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [error,setError] = useState()
 
   const onSubmit = async (data) => {
     try {
-      console.log(data)
-      axios.post("http://localhost:3030/admin", data).then((res)=>{
-        console.log(res.data.data)
-        const token = res.data.data.token
-        localStorage.setItem("token", token);
-        console.log("Token saved to local storage:", token);
-        window.location.reload(true)
-
-      });
+      const res = await axios.post("http://localhost:3030/admin", data);
+      console.log(res.data.data);
+      const token = res.data.data.token;
+      localStorage.setItem("token", token);
+      console.log("Token saved to local storage:", token);
+      window.location.reload(true);
     } catch (error) {
-      console.error(error);
+      setError(error.response.data);
     }
   };
 
@@ -37,17 +35,18 @@ function AdminLogin() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label htmlFor="username">Username</label>
-                <input className="form-input" {...register('userName', { required: true })}
+                <input className={ `form-input ${errors.userName ? "border-danger border-2": ""}`} {...register('userName', { required: true })}
                 />
-                {errors.username && <span>Username is required</span>}
+                {errors.userName && <span className="text-danger">Username kosong! </span>}
               </div>
               <div>
                 <label htmlFor="password">Password</label>
-                <input className="form-input" type="password" {...register('password', { required: true })}
+                <input className={ `form-input ${errors.password? "border-danger border-2": ""}`} type="password" {...register('password', { required: true })}
                 />
-                {errors.password && <span>Password is required</span>}
+                {errors.password && <span className="text-danger">Password Kosong! </span>}
               </div>
               <button className="btn-login mt-2" type="submit">Login</button>
+              <span className={`text-danger ${error ? "d-block" : "d-none"}`}>{error}</span>
             </form>
           </div>
         </div>

@@ -111,7 +111,8 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
                     <option value="spouse">Pasangan</option>
                   </select>
                 <p className="form-label">Nama</p>
-                <input className="form-basic-data" type="text" placeholder="Nama Lengkap" {...registerForm("nama", {required: true})} />
+                <input className={`form-basic-data ${errorsForm.nama ? "border-2 border-danger" : ""}`} type="text" placeholder="Nama Lengkap" {...registerForm("nama", {required: true})} />
+                {errorsForm.nama && <span className="text-danger">Nama Harus Diisi ! </span>}
                 <p className="form-label">Alias</p>
                 <input className="form-basic-data" type="text" placeholder="Alias" {...registerForm("alias", {required: true})} />
                 <p className="form-label">Nama Kecil</p>
