@@ -16,7 +16,7 @@ function FamilyTree() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:3030/people`)
+      .get(`http://gen-tree-backend-fe240a55091e.herokuapp.com/people`)
       .then((res) => {
         setNodes(res.data.data);
         setLoaded(true);
