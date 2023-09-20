@@ -40,7 +40,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
       }
 
       const response = await axios.post(
-        'http://localhost:3030/people/addWithRelation',
+        'https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/people/addWithRelation',
         requestData,
         {
           headers: {
@@ -69,7 +69,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
       }
 
       const response = await axios.post(
-        'http://localhost:3030/people/addDeathDate',
+        'https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/people/addDeathDate',
         requestData,
         {
           headers: {

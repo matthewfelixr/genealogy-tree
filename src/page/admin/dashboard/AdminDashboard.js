@@ -8,7 +8,7 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import RulerTree from "../../features/RulerTree";
 
-const base_url = "http://localhost:3030"
+const base_url = "https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1"
 
 function AdminDashboard() {
   const [nodes, setNodes] = useState(null);

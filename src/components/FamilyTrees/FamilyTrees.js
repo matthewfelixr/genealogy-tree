@@ -30,7 +30,7 @@ const FamilyTrees = ({tree}) => {
         data.tanggal_lahir = null; // Set death date to null if it's empty or invalid
       }
   
-      const response = await axios.post('http://localhost:3030/people', data, {
+      const response = await axios.post('https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/people', data, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':`Bearer ${token}`

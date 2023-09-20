@@ -10,7 +10,7 @@ function AdminLogin() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3030/admin", data);
+      const res = await axios.post("https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/admin", data);
       console.log(res.data.data);
       const token = res.data.data.token;
       localStorage.setItem("token", token);
