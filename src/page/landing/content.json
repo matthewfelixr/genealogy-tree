@@ -1,0 +1,33 @@
+{
+  "section_1": {
+    "image": "/image/GenTree.png",
+    "title": "Web Silsilah Keluarga Kerajaan Sumedang",
+    "sub_title": "adalah situs yang menyajikan informasi sejarah silsilah keluarga Kerajaan Sumedang Larang, yang merupakan salah satu Kerajaan Islam di Jawa Barat. Pada web ini, dapat dilihat penguasa generasi-generasi yang ada. Selain itu, didalam website ini ditampilkan pula silsilah Keluarga Kerajaan Sumedang Larang. Penguasa generasi terdahulu ditampilkan dalam diagram silsilah secara vertikal, sedangkan Silsilah Keluarga ditampilkan dengan bentuk diagram graf. Klik pada tombol dibawah untuk jelajahi fitur yang ada.",
+    "button_text": "Pelajari Lebih Lanjut"
+  },
+  "section_2": {
+    "image": "/image/logo-sumedang.png",
+    "title": "Tentang Kerajaan Sumedang",
+    "sub_title": "Kerajaan Sumedang Larang merupakan salah satu kerajaan Islam di pulau Jawa bagian barat yang berdiri pada tahun 721 M. Kerajaan ini memiliki sejarah yang cukup panjang, mulai dari abad ke-8 Masehi hingga menjadi sebuah negara berdaulat di abad ke-16 Masehi."
+  },
+  "section_3": {
+    "title": "Keturunan Pangeran Kornel",
+    "sub_title": "Yang merupakan salah satu tokoh berpengaruh dalam masa pemerintahan Kerajaan Sumedang",
+    "card": [
+      {
+        "image": "image/pangeran_sugih.jpg",
+        "name": "Pangeran Soeria Koesoemah Adinata",
+        "alias": "(Pangeran Soegih)",
+        "title": "Bupati Sumedang",
+        "year": "1836-1882"
+      },
+      {
+        "image": "image/pangeran_mekah.jpg",
+        "name": "Pangeran Aria Soeria Atmadja",
+        "alias": "(Pangeran Mekah)",
+        "title": "Bupati Sumedang",
+        "year": "1882-1919"
+      }
+    ]
+  }
+}

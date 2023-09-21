@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
+import content from "./content.json"
 
 function LandingPage() {
 
@@ -29,7 +30,7 @@ function LandingPage() {
                   alt="logo-sumedang"
                   width={200}
                   height={200}
-                  src="/image/GenTree.png"
+                  src={content?.section_1.image}
                 />
               </div>
               <div className="col p-0">
@@ -42,7 +43,7 @@ function LandingPage() {
                         textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       }}
                     >
-                      Web Silsilah Keluarga Kerajaan Sumedang
+                      {content?.section_1.title}
                     </h1>
                     <div className="row">
                       <div className="col">
@@ -52,23 +53,14 @@ function LandingPage() {
                             textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                           }}
                         >
-                          adalah situs yang menyajikan informasi sejarah
-                          silsilah keluarga Kerajaan Sumedang Larang, yang
-                          merupakan salah satu Kerajaan Islam di Jawa Barat.
-                          Pada web ini, dapat dilihat penguasa generasi-generasi
-                          yang ada. Selain itu, didalam website ini ditampilkan
-                          pula silsilah Keluarga Kerajaan Sumedang Larang.
-                          Penguasa generasi terdahulu ditampilkan dalam diagram
-                          silsilah secara vertikal, sedangkan Silsilah Keluarga
-                          ditampilkan dengan bentuk diagram graf. Klik pada
-                          tombol dibawah untuk jelajahi fitur yang ada.
+                          {content?.section_1.sub_title}
                         </p>
                         <Link to="/features">
                           <button
                             type="button"
                             className="btn btn-success btn-lg border-warning"
                           >
-                            Pelajari Lebih Lanjut
+                            {content?.section_1.button_text}
                           </button>
                         </Link>
                       </div>
@@ -91,15 +83,11 @@ function LandingPage() {
               <div className="col p-0">
                 <div className="row">
                   <div className="col text-end">
-                    <h1 className="fw-semibold">Tentang Kerajaan Sumedang</h1>
+                    <h1 className="fw-semibold">{content?.section_2.title}</h1>
                     <div className="row">
                       <div className="col">
                         <p>
-                          Kerajaan Sumedang Larang merupakan salah satu kerajaan
-                          Islam di pulau Jawa bagian barat yang berdiri pada
-                          tahun 721 M. Kerajaan ini memiliki sejarah yang cukup
-                          panjang, mulai dari abad ke-8 Masehi hingga menjadi
-                          sebuah negara berdaulat di abad ke-16 Masehi.
+                          {content?.section_2.sub_title}
                         </p>
                       </div>
                     </div>
@@ -111,7 +99,7 @@ function LandingPage() {
                   alt="logo-sumedang"
                   width={200}
                   height={250}
-                  src="/image/logo-sumedang.png"
+                  src={content?.section_2.image}
                 />
               </div>
             </div>
@@ -126,7 +114,7 @@ function LandingPage() {
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              Keturunan Pangeran Kornel
+              {content?.section_3.title}
             </h1>
             <h6
               className="fw-semibold text-center mb-5"
@@ -135,53 +123,26 @@ function LandingPage() {
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              Yang merupakan salah satu tokoh berpengaruh dalam masa pemerintahan Kerajaan Sumedang
+              {content?.section_3.sub_title}
             </h6>
             <div className="row justify-content-between d-flex text-center gap-3">
-              <div className="col align-items-center justify-content-center d-flex text-center">
-                    <Card style={{height:'540px'}} >
-                      <Card.Img variant="top" src="/image/pangeran_sugih.jpg" style={styles.cardImage} />
+                {content?.section_3.card.map((cards,index)=>(
+              <div className="col align-items-center justify-content-center d-flex text-center" key={index}>
+                    <Card style={{height:'540px'}}  >
+                      <Card.Img variant="top" src={cards.image} style={styles.cardImage} />
                       <Card.Body >
-                        <Card.Title style={{textAlign:'center', fontSize:'16px'}}>Pangeran Soeria Koesoemah Adinata</Card.Title>
-                        <Card.Title style={{textAlign:'center', fontSize:'16px'}}>(Pangeran Soegih)</Card.Title>
+                        <Card.Title style={{textAlign:'center', fontSize:'16px'}}>{cards.name}</Card.Title>
+                        <Card.Title style={{textAlign:'center', fontSize:'16px'}}>{cards.alias}</Card.Title>
                         <Card.Text>
-                          Bupati Sumedang
+                        {cards.title}
                         </Card.Text>
                         <Card.Text>
-                          1836-1882
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-              </div>
-              <div className="col align-items-center justify-content-center d-flex text-center">
-                    <Card style={{height:'540px'}} >
-                      <Card.Img variant="top" src="/image/pangeran_mekah.jpg" style={styles.cardImage} />
-                      <Card.Body>
-                      <Card.Title style={{textAlign:'center', fontSize:'16px'}}>Pangeran Aria Soeria Atmadja</Card.Title>
-                        <Card.Title style={{textAlign:'center', fontSize:'16px'}}>(Pangeran Mekah)</Card.Title>
-                        <Card.Text>
-                          Bupati Sumedang
-                        </Card.Text>
-                        <Card.Text>
-                          1882-1919
+                        {cards.year}
                         </Card.Text>
                       </Card.Body>
                     </Card>
               </div>
-              {/* <div className="col align-items-center justify-content-center d-flex text-center">
-              <Card style={{height:'540px'}} >
-                <Card.Img variant="top" src="/image/kadir_soemawilaga_1.jpg" style={styles.cardImage} />
-                <Card.Body>
-                <Card.Title style={{textAlign:'center', fontSize:'16px'}}>Rd. Kadir Soemawilaga</Card.Title>
-                  <Card.Text>
-                    Lahir : 18 November 1858
-                  </Card.Text>
-                  <Card.Text>
-                    Wafat: 28 April 1928
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              </div> */}
+                ))}
             </div>
           </div>
         </section>

@@ -1,0 +1,44 @@
+{
+  "title": [
+    {
+      "text": "Jelajahi "
+    },
+    {
+      "text": "Fitur"
+    },
+    {
+      "text": " GenTree",
+      "style": "highlight"
+    }
+  ],
+  "sub_title": [
+    {
+      "text": "Pilihlah "
+    },
+    {
+      "text": "layanan",
+      "style": "highlight"
+    },
+    {
+      "text": " yang akan anda jelajahi pada Website GenTree"
+    }
+  ],
+  "card": {
+    "feature": [
+      {
+        "image": "/image/silsilah-keluarga.png",
+        "title": "Silsilah Keluarga",
+        "name": "family-tree",
+        "desc": "Lihat bagaimana silsilah keluarga Kerajaan Sumedang",
+        "button_text": "Jelajahi Fitur Ini!"
+      },
+      {
+        "image": "/image/cari-silsilah.png",
+        "title": "Generasi Penguasa",
+        "name": "ruler-tree",
+        "desc": "Lihat siapa saja penguasa Kerajaan Sumedang",
+        "button_text": "Jelajahi Fitur Ini!"
+      }
+    ]
+  }
+}
