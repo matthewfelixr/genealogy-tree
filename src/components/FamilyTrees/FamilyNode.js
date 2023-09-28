@@ -11,6 +11,7 @@ import './FormAddData.css'
 const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selected }) => {
   const token = localStorage.getItem('token')
   const [clickedNodeId, setClickedNodeId] = useState(null);
+  const [loading,setLoading] = useState(false);
   const clickHandler = useCallback(() => {
     setClickedNodeId(node.id);
     onClick(node.id);
@@ -30,6 +31,8 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
   } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true)
+    console.log(loading)
     try {
       const requestData = { ...data, existing_id: clickedNodeId }; // Include existing_id in the request data
       if (!requestData.tanggal_wafat || isNaN(Date.parse(requestData.tanggal_wafat))) {
@@ -49,11 +52,14 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           },
         }
       );
+      setLoading(false)
       console.log(response.data);
       window.location.reload()
     } catch (error) {
       console.error(error);
+      setLoading(false)
     }
+    
   };
 
   const [show, setShow] = useState(false);
@@ -62,6 +68,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
   const handleShow = () => setShow(true);
 
   const onSubmit2 = async (data) => {
+    setLoading(true)
     try {
       const requestData = { ...data, id: clickedNodeId }; // Include existing_id in the request data
       if (!requestData.death || isNaN(Date.parse(requestData.death))) {
@@ -78,11 +85,14 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           },
         }
       );
+      setLoading(false);
       console.log(response.data);
       window.location.reload()
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
+    
   };
   const [show2, setShow2] = useState(false);
 
@@ -145,7 +155,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
                 <p className="form-label">Alamat Makam</p>
                 <input className="form-basic-data" type="text" placeholder="Alamat Makam" {...registerForm("alamat_makam", {})} />
 
-                <input className="btn-submit" type="submit" />
+                <input className={`btn-submit ${loading === true ? "disabled btn btn-secondary" : ""}`} type="submit" />
               </form>
         </Modal.Body>
         <Modal.Footer>
@@ -174,7 +184,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           <input className='form-basic-data' type="text" placeholder="Alamat Makam" {...registerEditForm("alamat_makam", 
           // {required: true}
           )} />
-          <input className='btn-submit' type="submit" />
+          <input className={`btn-submit ${loading === true ? "disabled btn btn-secondary" : ""}`} type="submit" />
         </form>
         </Modal.Body>
         <Modal.Footer>

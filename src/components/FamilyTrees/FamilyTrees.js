@@ -19,9 +19,10 @@ const FamilyTrees = ({tree}) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const [loading,setLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = async (data) => {
+    setLoading(true)
     try {
       if (!data.tanggal_wafat || isNaN(Date.parse(data.tanggal_wafat))) {
         data.tanggal_wafat = null; // Set death date to null if it's empty or invalid
@@ -37,10 +38,13 @@ const FamilyTrees = ({tree}) => {
           // other headers if needed
         },
       });
+      
       console.log(response.data);
+      setLoading(false)
       window.location.reload();
     } catch (error) {
       console.error(error);
+      setLoading(false)
     }
   };
   
@@ -159,7 +163,7 @@ const FamilyTrees = ({tree}) => {
                 <p className="form-label">Alamat Makam</p>
                 <input className="form-basic-data" type="text" placeholder="Alamat Makam" {...register("alamat_makam", {})} />
 
-                <input className="btn-submit" type="submit" />
+                <input className={`btn-submit ${loading === true ? "disabled btn btn-secondary" : ""}`} type="submit" />
               </form>
               </Modal.Body>
               <Modal.Footer>
