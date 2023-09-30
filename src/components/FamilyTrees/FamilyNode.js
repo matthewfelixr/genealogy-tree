@@ -52,9 +52,9 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           },
         }
       );
-      setLoading(false)
       console.log(response.data);
       window.location.reload()
+      setLoading(false)
     } catch (error) {
       console.error(error);
       setLoading(false)
@@ -85,9 +85,9 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           },
         }
       );
-      setLoading(false);
       console.log(response.data);
       window.location.reload()
+      setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);

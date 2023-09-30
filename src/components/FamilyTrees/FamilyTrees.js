@@ -40,8 +40,8 @@ const FamilyTrees = ({tree}) => {
       });
       
       console.log(response.data);
-      setLoading(false)
       window.location.reload();
+      setLoading(false)
     } catch (error) {
       console.error(error);
       setLoading(false)
