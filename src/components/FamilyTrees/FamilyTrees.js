@@ -39,9 +39,8 @@ const FamilyTrees = ({tree}) => {
         },
       });
       
-      console.log(response.data);
+      // console.log(response.data);
       window.location.reload();
-      setLoading(false)
     } catch (error) {
       console.error(error);
       setLoading(false)

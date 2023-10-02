@@ -15,17 +15,14 @@ function AdminDashboard() {
   const [loaded,setLoaded] = useState(false);
   const [toggleState, setToggleState] = useState(0);
 
-  const token = localStorage.getItem('token')
-  const decoded = jwt_decode(token)
-
   useEffect(() => {
     const token = localStorage.getItem('token')
     const decoded = jwt_decode(token)
     if (decoded.exp < Date.now() / 1000) {
-      console.log('Token has expired.');
+      // console.log('Token has expired.');
       logOut();
     } else {
-      console.log('Token has not expired.');
+      // console.log('Token has not expired.');
     }
   },[])
 
@@ -55,7 +52,7 @@ function AdminDashboard() {
       <div className="admin-dashboard d-flex">
         <div className="sidebar-list-container">
           <ul className="sidebar-listing-container p-1 nav-tabs">
-            <p className="sidebar-title pt-4"> Dashboard </p>
+            <p className="sidebar-title pt-4" onClick={() => toggleTab(0)}> Dashboard </p>
             <li
               className={`sidebar-list align-items-center py-3 ${
                 toggleState === 1 ? "active" : ""
@@ -72,14 +69,14 @@ function AdminDashboard() {
             >
               <p className="sidebar-list-title">Generasi Penguasa</p>
             </li> */}
-            <li
+            {/* <li
               className={`sidebar-list align-items-center py-3 ${
                 toggleState === 3 ? "active" : ""
               }`}
               onClick={() => toggleTab(3)}
             >
               <p className="sidebar-list-title">Feature</p>
-            </li>
+            </li> */}
             <li
               className={`logout-button bg-danger align-items-center py-3`}
               onClick={() => logOut()}

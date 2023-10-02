@@ -7,17 +7,20 @@ import axios from "axios";
 function AdminLogin() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [error,setError] = useState()
+  const [loading,setLoading] = useState(false)
 
   const onSubmit = async (data) => {
+    setLoading(true)
     try {
       const res = await axios.post("https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/admin", data);
-      console.log(res.data.data);
+      // console.log(res.data.data);
       const token = res.data.data.token;
       localStorage.setItem("token", token);
-      console.log("Token saved to local storage:", token);
+      // console.log("Token saved to local storage:", token);
       window.location.reload(true);
     } catch (error) {
       setError(error.response.data);
+      setLoading(false)
     }
   };
 
@@ -45,7 +48,8 @@ function AdminLogin() {
                 />
                 {errors.password && <span className="text-danger">Password Kosong! </span>}
               </div>
-              <button className="btn-login mt-2" type="submit">Login</button>
+              <button className={`btn-login mt-2 ${loading === true ? "disabled btn btn-secondary" : ""}`}>Login</button>
+              
               <span className={`text-danger ${error ? "d-block" : "d-none"}`}>{error}</span>
             </form>
           </div>

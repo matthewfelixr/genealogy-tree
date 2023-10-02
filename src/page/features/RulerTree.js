@@ -11,8 +11,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 
 function RulerTree() {
   
-
-  console.log(rulerData)
+  // console.log(rulerData)
   const [nodes, setNodes] = useState();
   const [selectId, setSelectId] = useState("");
   const [rootId, setRootId] = useState();

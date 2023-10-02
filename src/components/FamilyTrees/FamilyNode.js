@@ -1,11 +1,13 @@
 import React, { useState,useCallback } from 'react';
 import classNames from 'classnames';
+import moment from 'moment';
 import css from './FamilyNode.module.css';
 import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import './FormAddData.css'
+import './FormAddData.css';
+
 // import CardMember from '../Cards/CardMember/CardMember'
 
 const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selected }) => {
@@ -32,7 +34,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
 
   const onSubmit = async (data) => {
     setLoading(true)
-    console.log(loading)
+    // console.log(loading)
     try {
       const requestData = { ...data, existing_id: clickedNodeId }; // Include existing_id in the request data
       if (!requestData.tanggal_wafat || isNaN(Date.parse(requestData.tanggal_wafat))) {
@@ -52,9 +54,8 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       window.location.reload()
-      setLoading(false)
     } catch (error) {
       console.error(error);
       setLoading(false)
@@ -85,9 +86,8 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       window.location.reload()
-      setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -98,6 +98,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
 
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+
 
   return (
     <div className={css.root} style={style}>
@@ -207,35 +208,27 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           
         >
           <div className={css.container}>
-            <div className="mx-auto fw-bolder">
-              {node.nama}
+              <div className="mx-auto fw-bolder">
+                {node.nama}
+              </div>
+              <div className="mx-auto fw-bold fs-6">
+                {node.alias}
+              </div>
+              <div className="mx-auto">
+                {node.tanggal_lahir ? moment(node.tanggal_lahir).format('DD-MM-YYYY') : ""}
+              </div>
+              <div className="mx-auto">
+                {node.tanggal_wafat ? moment(node.tanggal_wafat).format('DD-MM-YYYY') + " (Meninggal)" : ""}
+              </div>
+              <div className="mx-auto">
+                {node.alamat_makam}
+              </div>
             </div>
-            <div className="mx-auto fw-bold fs-6">
-              {node.alias}
-            </div>
-            <div className="mx-auto">
-              {node.tanggal_lahir}
-            </div>
-            <div className="mx-auto">
-              {node.tanggal_wafat ? "Meninggal" : node.tanggal_wafat}
-            </div>
-            <div className="mx-auto">
-              {node.alamat_makam}
-            </div>
-          </div>
-          {/* <div className={css.id}>{node.name}</div>
-          <div className="">{node.birth}</div>
-          <div className={css.id}>{node.death}</div> */}
         </div>
         {(selected && token) &&(
           <>
           <button className={classNames(css.add)} onClick={handleShow}>+</button>
           <button className={classNames(css.edit)} onClick={handleShow2}>Edit</button>
-          {/* {(!node.death ?
-            <button className={classNames(css.edit)} onClick={handleShow2}>Edit</button>
-            :
-            <></>
-          )} */}
           </>
         )}
         {node.hasSubTree && (

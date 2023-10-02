@@ -12,6 +12,8 @@
   border-radius: 10px 0;
   overflow: hidden;
   cursor: pointer;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .male {
@@ -31,7 +33,6 @@
 }
 
 .container {
-  margin-top: 15%;
   width: inherit;
   height: inherit;
   margin-left: auto;
