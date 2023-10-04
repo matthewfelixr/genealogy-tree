@@ -67,17 +67,22 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const tanggal_wafat = new Date(node?.tanggal_wafat).toISOString().split("T")[0];
+  const tanggal_lahir =new Date(node?.tanggal_lahir).toISOString().split("T")[0];
   const onSubmit2 = async (data) => {
+    console.log(data)
     setLoading(true)
     try {
       const requestData = { ...data, id: clickedNodeId }; // Include existing_id in the request data
-      if (!requestData.death || isNaN(Date.parse(requestData.death))) {
-        requestData.death = null; // Set death date to null if it's empty or invalid
+      if (!requestData.tanggal_wafat || isNaN(Date.parse(requestData.tanggal_wafat))) {
+        requestData.tanggal_wafat = null; // Set tanggal date to null if it's empty or invalid
+      }
+      if (!requestData.tanggal_lahir || isNaN(Date.parse(requestData.tanggal_lahir))) {
+        requestData.tanggal_lahir = null; // Set death date to null if it's empty or invalid
       }
 
-      const response = await axios.post(
-        'https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/people/addDeathDate',
+      const response = await axios.put(
+        'https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/people/updateBiodata',
         requestData,
         {
           headers: {
@@ -142,7 +147,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
                   <input {...registerForm("gender", { required: true })} type="radio" value="female" />
                 </div>
                 <p className="form-label"> Alamat </p>
-                <input className="form-basic-data" type="text" placeholder="Alamat" {...registerForm("address", {required: true, maxLength: 80})} />
+                <input className="form-basic-data" type="text" placeholder="Alamat" {...registerForm("alamat", {required: true, maxLength: 80})} />
                 <div className="container m-0 p-0 d-flex">
                   <div className="w-50 p-1">
                     <p className="form-label">Tanggal Lahir</p>
@@ -171,7 +176,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
       {/* Modal For Edit */}
       <Modal show={show2} onHide={handleClose2}>
         <Modal.Header closeButton>
-          <Modal.Title>Ubah Status Kematian Anggota</Modal.Title>
+          <Modal.Title>Ubah Biodata Anggota</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <form onSubmit={handleSubmitEditForm(onSubmit2)}>
@@ -179,12 +184,40 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
             <h4>Anggota : [{`ID - ${node.id}`}] {node.nama}</h4>
           </div>
           {/* <div>{node.name}</div> */}
-          <p className='form-label'> Tanggal Wafat </p>
-          <input className='form-basic-data' type="date" placeholder="Tanggal Wafat" {...registerEditForm("tanggal_wafat", {required: true})} />
-          <p className='form-label'>Alamat Makam </p>
-          <input className='form-basic-data' type="text" placeholder="Alamat Makam" {...registerEditForm("alamat_makam", 
-          // {required: true}
-          )} />
+          <p className='form-label'>Nama</p>
+          <input className={`form-basic-data ${errorsForm.nama ? "border-2 border-danger" : ""}`} type="text" placeholder="Nama Lengkap" defaultValue={node?.nama} {...registerEditForm("nama", {required: true})} />
+          {errorsEditForm.nama && <span className="text-danger">Nama Harus Diisi ! </span>}
+          <p className="form-label">Alias</p>
+                <input className="form-basic-data" type="text" placeholder="Alias" {...registerEditForm("alias", {required: true})} defaultValue={node?.alias} />
+                <p className="form-label">Nama Kecil</p>
+                <input className="form-basic-data" type="text" placeholder="Nama Kecil" {...registerEditForm("nama_kecil", {required: true})} defaultValue={node?.nama_kecil} />
+                <p className="form-label">Jabatan</p>
+                <input className="form-basic-data" type="text" placeholder="Jabatan" {...registerEditForm("jabatan", {required: true})} defaultValue={node?.jabatan} />
+                <p className="form-label">Tahun Awal Menjabat</p>
+                <input className="form-basic-data" type="text" placeholder="Cth:1822" {...registerEditForm("awal_jabatan", {required: true})} defaultValue={node?.awal_jabatan} />
+                <p className="form-label">Tahun Akhir Menjabat</p>
+                <input className="form-basic-data" type="text" placeholder="Cth:1830" {...registerEditForm("akhir_jabatan", {required: true})} defaultValue={node?.akhir_jabatan} />
+          <div>
+            <p className="form-label">Jenis Kelamin</p>
+            <label>Laki-laki</label>
+            <input {...registerEditForm("gender", { required: true })} type="radio" value="male"  defaultChecked={node?.gender === "male"}/>
+            <label>Perempuan</label>
+            <input {...registerEditForm("gender", { required: true })} type="radio" value="female" defaultChecked={node?.gender === "female"} />
+          </div>
+          <p className="form-label"> Alamat </p>
+          <input className="form-basic-data" type="text" placeholder="Alamat" {...registerEditForm("alamat", {required: true, maxLength: 80})} defaultValue={node?.alamat} />
+          <div className="container m-0 p-0 d-flex">
+            <div className="w-50 p-1">
+              <p className="form-label">Tanggal Lahir</p>
+              <input className="form-basic-data" type="date" placeholder="Tanggal Lahir" {...registerEditForm("tanggal_lahir", {})} defaultValue={node?.tanggal_lahir ? tanggal_lahir : ""} />
+            </div>
+            <div className="w-50 p-1">
+              <p className="form-label">Tanggal Wafat</p>
+              <input className="form-basic-data" type="date" placeholder="Tanggal Wafat" {...registerEditForm("tanggal_wafat", {})} defaultValue={node?.tanggal_wafat ? tanggal_wafat : ""} />
+            </div>
+          </div>
+          <p className="form-label">Alamat Makam</p>
+          <input className="form-basic-data" type="text" placeholder="Alamat Makam" {...registerEditForm("alamat_makam", {})} defaultValue={node?.alamat_makam} />
           <input className={`btn-submit ${loading === true ? "disabled btn btn-secondary" : ""}`} type="submit" />
         </form>
         </Modal.Body>
