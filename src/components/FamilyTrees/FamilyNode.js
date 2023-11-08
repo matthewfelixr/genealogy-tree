@@ -99,11 +99,40 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
     }
     
   };
-  const [show2, setShow2] = useState(false);
+  const onSubmit3 = async (data) => {
+    console.log(data)
+    setLoading(true)
+    try {
+      const requestData = { id:clickedNodeId }
+      const response = await axios.put(
+        'https://gen-tree-backend-fe240a55091e.herokuapp.com/api/v1/people/deletePeople',
+        requestData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+        }
+      );
+      // console.log(response.data);
+      window.location.reload()
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+    
+  };
 
+
+
+
+  const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-
+  
+  const [show3, setShow3] = useState(false);
+  const handleClose3 = () => setShow3(false);
+  const handleShow3 = () => setShow3(true);
 
   return (
     <div className={css.root} style={style}>
@@ -230,6 +259,23 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show ={show3} onHide={handleClose3}>
+      <Modal.Header closeButton>
+          <Modal.Title>Menghapus Data Anggota</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Apakah anda yakin untuk menghapus data [{`ID - ${node.id}`}] {node.nama}</h4>
+          <button className={`btn-submit ${loading === true ? "disabled btn btn-secondary" : ""}`} onClick={onSubmit3} > Hapus </button>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose3}>
+            Tutup
+          </Button>
+          <Button variant="primary" onClick={handleClose3}>
+            Simpan Draft
+          </Button>
+        </Modal.Footer>
+      </Modal>
         <div
           className={classNames(
             css.inner,
@@ -261,7 +307,8 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
         {(selected && token) &&(
           <>
           <button className={classNames(css.add)} onClick={handleShow}>+</button>
-          <button className={classNames(css.edit)} onClick={handleShow2}>Edit</button>
+          <button className={classNames(css.edit)} onClick={handleShow2}>Ubah</button>
+          <button className={classNames(css.delete)} onClick={handleShow3}>-</button>
           </>
         )}
         {node.hasSubTree && (
