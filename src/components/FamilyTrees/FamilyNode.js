@@ -269,10 +269,7 @@ const FamilyNode = ({ node, isRoot, isHover, onClick, onSubClick, style, selecte
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose3}>
-            Tutup
-          </Button>
-          <Button variant="primary" onClick={handleClose3}>
-            Simpan Draft
+            Batal
           </Button>
         </Modal.Footer>
       </Modal>
